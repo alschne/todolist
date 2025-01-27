@@ -25,9 +25,18 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
         }
-        List {
-            ForEach(tasks, id: \.self) { task in
-                Text(task)
+        NavigationView {
+            List {
+                ForEach(tasks, id: \.self) { task in
+                    Text(task)
+                }
+                .onDelete { indexSet in
+                    tasks.remove(atOffsets: indexSet)
+                }
+            }
+            .navigationTitle("My To Do List")
+            .toolbar {
+                EditButton()
             }
         }
     }
